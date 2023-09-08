@@ -28,17 +28,32 @@ function showMovies(data) {
 
             <div class="movie-info">
                 <h3>${name}</h3>
-                <span>${vote_average}</span>
+                <span class="${getVoteColor(vote_average)}">${vote_average}</span>
             </div>
                 
             <div class="overview">
 
                 <h3>Overview</h3>
-                ${(overview.substr(0,500)+'..')}
+                ${
+                  overview.length >= 500
+                    ? overview.substr(0, 500) + "..."
+                    : overview
+                }
                 <br/> 
                 <button class="more">Read more</button
             </div>
         `
         main.appendChild(movieEl);
     })
+}
+
+//GETTING VOTE AVERAGE COLOR
+function getVoteColor(vote) {
+    if (vote>= 8) {
+        return 'green'
+    } else if (vote >= 5) {
+        return "orange"
+    } else {
+        return 'red'
+    }
 }
