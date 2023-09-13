@@ -1,6 +1,8 @@
 import {categories} from "./categories.js";
 
-const API_URL = 'https://api.themoviedb.org/3/tv/popular?api_key=1cf50e6248dc270629e802686245c2c8';
+const BASE_URL = 'https://api.themoviedb.org/3';
+const API_KEY = 'api_key=1cf50e6248dc270629e802686245c2c8';
+const API_URL = 'https://api.themoviedb.org/3/tv/top_rated?api_key=1cf50e6248dc270629e802686245c2c8';
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 const container = document.getElementById('container');
 const getCategory = document.getElementById('categories');
@@ -44,32 +46,43 @@ const showMovies = (data) => {
         container.appendChild(movieEl);
 
         document.getElementById(id).addEventListener('click', () => {
-            console.log(id)
-            openModal(movie)
+            console.log(id);
+            openModal(movie);
         })
     })
 }
 
-//OPENING MODAL
+//OPENING & CLOSING MODAL
+const closeModal = () => {
+    modal.classList.remove("active");
+};
+
 const openModal = (movie) => {
 
-    modal.style.display = "block";
+    modal.classList.add('active');
     modal.innerHTML = `
         <div class="modal_container">
-            <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+            <span class="close">&times;</span>
             <h3>Movie name: ${movie.name}</h3>
             <div class="modal_content">
-                <img src="${movie.poster_path? IMG_URL + movie.poster_path : "http://via.placeholder.com/300x450"}" alt="${movie.name}"     class="img_modal">
+                <img src="${movie.poster_path? IMG_URL + movie.poster_path : "http://via.placeholder.com/300x450"}" alt="${movie.name}" class="img_modal">
                 <div class="modal_other_info">
                     <span>Vote average: <span class="${getVoteColor(movie.vote_average)}">${movie.vote_average}</span></span>
                     <span>First air date: ${movie.first_air_date}</span>
                 </div>
             </div>
             <p class="modal_overview">${movie.overview}</p>
-        </div>
-        `  
-}
+        </div>`  
 
+    document.addEventListener("click", function (event) {
+        if (event.target.classList.contains("close") ||
+          (event.target.classList.contains("active") &&
+            !event.target.closest(".modal_container"))
+        ) {
+          closeModal();
+        }
+    });         
+}
 
 //GETTING VOTE AVERAGE COLOR
 const getVoteColor = (vote) => {
@@ -88,4 +101,3 @@ const getVoteColor = (vote) => {
 
 fetchMovies();
 setCategories();
-

@@ -195,6 +195,10 @@ main{
     flex-direction: column;
 }
 
+.active {
+    display: block;
+}
+
 /* Close Button */
 .close {
     color: #aaaaaa;
@@ -208,3 +212,4 @@ main{
     text-decoration: none;
     cursor: pointer;
 }
+
