@@ -1,12 +1,16 @@
 import {categories} from "./categories.js";
 
 const BASE_URL = 'https://api.themoviedb.org/3';
-const API_KEY = 'api_key=1cf50e6248dc270629e802686245c2c8';
-const API_URL = 'https://api.themoviedb.org/3/tv/top_rated?api_key=1cf50e6248dc270629e802686245c2c8';
+const API_KEY = 'api_key=32ccb349a74920e218cca3e62608f9ab';
+const API_URL = BASE_URL+`/tv/popular?`+API_KEY;
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
+const SEARCH_URL = BASE_URL+'/search/movie?'+API_KEY+'&query=';
 const container = document.getElementById('container');
 const getCategory = document.getElementById('categories');
 const modal = document.getElementById("myModal");
+const form = document.getElementById("form");
+const search = document.getElementById("search");
+
 
 //GETTING DATA
 const fetchMovies = async () => {
@@ -16,9 +20,10 @@ const fetchMovies = async () => {
     showMovies(json.results);
   };
 
+
 //DISPLAYING DATA
 const showMovies = (data) => {
-    
+
     data.forEach(movie => {
         const {name, poster_path, vote_average, overview, id, first_air_date} = movie;
         const movieEl = document.createElement('div');
@@ -47,6 +52,11 @@ const showMovies = (data) => {
 
         document.getElementById(id).addEventListener('click', () => {
             console.log(id);
+
+            fetch(`https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`)
+                .then(response => response.json())
+                .then(response => console.log(response));
+
             openModal(movie);
         })
     })
@@ -98,6 +108,20 @@ const getVoteColor = (vote) => {
         getCategory.append(categoryEl);
     })
 }
+
+//SEARCH MOVIES
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const searchValue = search.value;
+    if(searchValue) {
+        fetchMovies(SEARCH_URL+searchValue);
+    }else{
+        fetchMovies(API_URL);
+    }
+})
+
+
 
 fetchMovies();
 setCategories();
