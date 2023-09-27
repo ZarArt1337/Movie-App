@@ -1,24 +1,35 @@
 import {categories} from "./categories.js";
 
-const BASE_URL = 'https://api.themoviedb.org/3';
-const API_KEY = 'api_key=32ccb349a74920e218cca3e62608f9ab';
-const API_URL = BASE_URL+`/tv/popular?`+API_KEY;
+const API_KEY = '32ccb349a74920e218cca3e62608f9ab';
+const API_URL = 'https://api.themoviedb.org/3/tv/top_rated?api_key=32ccb349a74920e218cca3e62608f9ab';
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
-const SEARCH_URL = BASE_URL+'/search/movie?'+API_KEY+'&query=';
+const SEARCH_URL = 'https://api.themoviedb.org/3/search/movie?api_key=32ccb349a74920e218cca3e62608f9ab&query=';
 const container = document.getElementById('container');
 const getCategory = document.getElementById('categories');
 const modal = document.getElementById("myModal");
 const form = document.getElementById("form");
 const search = document.getElementById("search");
 
+var lastUrl ='';
+
+
 
 //GETTING DATA
-const fetchMovies = async () => {
-    const res = await fetch(API_URL);
-    const json = await res.json();
-    console.log(json.results);
-    showMovies(json.results);
-  };
+// const fetchMovies = async () => {
+//     lastUrl = url;
+//     const res = await fetch(url);
+//     const json = await res.json();
+//     console.log(json.results);
+//     showMovies(json.results);
+//   };
+
+function fetchMovies(url) {
+    lastUrl = url;
+        fetch(url).then(res => res.json()).then(data => {
+            console.log(data.results)
+            showMovies(data.results);
+      })
+}
 
 
 //DISPLAYING DATA
@@ -53,9 +64,9 @@ const showMovies = (data) => {
         document.getElementById(id).addEventListener('click', () => {
             console.log(id);
 
-            fetch(`https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`)
+            fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`)
                 .then(response => response.json())
-                .then(response => console.log(response));
+                .then(response => console.log("response",`https://www.youtube.com/watch?v=${response.results[0].key}`));
 
             openModal(movie);
         })
@@ -82,6 +93,7 @@ const openModal = (movie) => {
                 </div>
             </div>
             <p class="modal_overview">${movie.overview}</p>
+            <iframe src="https://www.youtube.com/watch?v=${movie.key}" frameborder="0"></iframe>
         </div>`  
 
     document.addEventListener("click", function (event) {
@@ -110,18 +122,17 @@ const getVoteColor = (vote) => {
 }
 
 //SEARCH MOVIES
-form.addEventListener('submit', (e) => {
+form.addEventListener('keyup', (e) => {
     e.preventDefault();
 
     const searchValue = search.value;
-    if(searchValue) {
+    if(searchValue && searchValue !== '') {
         fetchMovies(SEARCH_URL+searchValue);
     }else{
-        fetchMovies(API_URL);
+        fetchMovies();
     }
 })
 
 
-
-fetchMovies();
+fetchMovies(API_URL);
 setCategories();
