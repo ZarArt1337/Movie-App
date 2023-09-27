@@ -36,15 +36,15 @@ function fetchMovies(url) {
 const showMovies = (data) => {
 
     data.forEach(movie => {
-        const {name, poster_path, vote_average, overview, id, first_air_date} = movie;
+        const {name, poster_path, vote_average, overview, id, first_air_date, title, release_date} = movie;
         const movieEl = document.createElement('div');
         movieEl.classList.add('movie');
         movieEl.innerHTML = `
              <img src="${poster_path? IMG_URL + poster_path : "http://via.placeholder.com/300x450"}" alt="${name}">
 
             <div class="movie-info">
-                <h3>${name}</h3>
-                <span class="${getVoteColor(vote_average)}">${vote_average}</span>
+                <h3>${name? name: title}</h3>
+                <span class="${getVoteColor(vote_average)}">${vote_average.toFixed(2)}</span>
             </div>
                 
             <div class="overview">
@@ -84,12 +84,12 @@ const openModal = (movie) => {
     modal.innerHTML = `
         <div class="modal_container">
             <span class="close">&times;</span>
-            <h3>Movie name: ${movie.name}</h3>
+            <h3>Movie name: ${movie.name? movie.name: movie.title}</h3>
             <div class="modal_content">
                 <img src="${movie.poster_path? IMG_URL + movie.poster_path : "http://via.placeholder.com/300x450"}" alt="${movie.name}" class="img_modal">
                 <div class="modal_other_info">
-                    <span>Vote average: <span class="${getVoteColor(movie.vote_average)}">${movie.vote_average}</span></span>
-                    <span>First air date: ${movie.first_air_date}</span>
+                    <span>Vote average: <span class="${getVoteColor(movie.vote_average)}">${movie.vote_average.toFixed(2)}</span></span>
+                    <span>First air date: ${movie.first_air_date? movie.first_air_date: movie.release_date}</span>
                 </div>
             </div>
             <p class="modal_overview">${movie.overview}</p>
@@ -121,18 +121,22 @@ const getVoteColor = (vote) => {
     })
 }
 
+
+fetchMovies(API_URL);
+setCategories();
+
+
 //SEARCH MOVIES
 form.addEventListener('keyup', (e) => {
     e.preventDefault();
+    
+    container.innerHTML = '';
 
     const searchValue = search.value;
     if(searchValue && searchValue !== '') {
         fetchMovies(SEARCH_URL+searchValue);
     }else{
-        fetchMovies();
+        fetchMovies(API_URL);
     }
+
 })
-
-
-fetchMovies(API_URL);
-setCategories();
