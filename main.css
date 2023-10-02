@@ -1,0 +1,40 @@
+*{
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #001607;
+    font-family: 'Roboto', sans-serif;
+}
+
+header {
+    background-color: orange;
+    padding: 15px;
+}
+
+footer {
+    background-color: orange;
+    color: #000000;
+    text-align: center;
+    padding: 1rem;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-self: center;
+}
+
+.font_Special {
+    color: #0c3b00;
+    font-family: 'Caveat', cursive;
+    font-size: 2rem;
+}
+
+main{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

@@ -1,0 +1,55 @@
+/* Categories */
+#categories, #lists{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.category, .lists_btn{
+    color:white;
+    padding: 10px 20px;
+    background-color: orange;
+    border-radius: 10px;
+    margin: 5px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.category:hover {
+    background-color: green;
+}
+
+/*Highlight buttons*/
+.highlight{
+    background-color: red;
+}
+
+/* Clearing button */
+.hide {
+    display: none;
+}
+
+#clear_btn {
+    color:white;
+    padding: 10px 20px;
+    background-color: red;
+    border-radius: 10px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.clear_categories {
+    display: block;
+    text-align: center;
+}
+
+.no_results {
+    color: white;
+    padding: 20px;
+}
+
+.lists_btn {
+    background-color: green !important;
+}

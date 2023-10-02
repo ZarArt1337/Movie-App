@@ -8,7 +8,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="src/components/MovieList/styles.css">
+    <link rel="stylesheet" href="src/components/Modal/styles.css">
+    <link rel="stylesheet" href="src/components/CategoryFilter/styles.css">
+    <link rel="stylesheet" href="src/components/Search/styles.css">
+
     <title>ZMovies</title>
 </head>
 <body>
@@ -25,6 +30,12 @@
         </nav>
     </header>
 
+    <div id="lists">
+        <div id="top_rated_movies" class="lists_btn">TOP-Rated Movies</div>
+        <div id="popular_movies" class="lists_btn">Popular Movies</div>
+        <div id="top_rated_series" class="lists_btn">TOP-Rated Series</div>
+        <div id="popular_series" class="lists_btn">Popular Series</div>
+    </div>
     <!--Categories-->
     <div id="categories"></div>
     <div class="clear_categories"><div id="clear_btn" class="hide category">Clear ALL</div></div>
@@ -40,5 +51,10 @@
     <footer class="font_Special">ZarArt</footer>
 
 </body>
-<script src="js/script.js" type="module"></script>
+
+<script src="src/components/MovieList/MovieList.js" type="module"></script>
+<script src="src/components/Modal/Modal.js" type="module"></script>
+<script src="src/components/Search/Search.js" type="module"></script>
+<script src="src/components/CategoryFilter/CategoryFilter.js" type="module"></script>
+<script src="main.js" type="module"></script>
 </html>
