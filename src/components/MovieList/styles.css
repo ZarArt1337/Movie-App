@@ -55,3 +55,31 @@
     margin-top: 5px;
     cursor: pointer;
 }
+
+/* Pagination */
+.pagination{
+    display:flex;
+    margin:10px 30px;
+    align-items: center;
+    justify-content: center;
+    color:white;
+    font-weight: 600;
+}
+
+.prev_page, .next_page{
+    padding:20px;
+    cursor:pointer;
+}
+
+.first_page {
+    padding: 20px 0 20px 0;
+    cursor: pointer;
+}
+
+.current_page{
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: 5px solid orange;
+    font-size: 20px;
+    color: orange;
+}

@@ -6,6 +6,7 @@ const carousel = document.getElementById("carousel");
 const lists = document.getElementById("lists");
 const categories = document.getElementById('categories');
 const searchInfo = document.getElementById('search_info');
+const pagination = document.getElementById('pagination');
 
 form.addEventListener("keyup", e => {
   e.preventDefault();
@@ -18,6 +19,7 @@ form.addEventListener("keyup", e => {
     carousel.classList.add('hide');
     lists.classList.add('hide');
     categories.classList.add('hide');
+    pagination.classList.add('hide');
     searchInfo.classList.add('show');
     searchInfo.innerHTML = `<h1>Search reults for: '${searchValue}'</h1>`;
     } else {
@@ -25,6 +27,7 @@ form.addEventListener("keyup", e => {
       carousel.classList.remove('hide');
       lists.classList.remove('hide');
       categories.classList.remove('hide');
+      pagination.classList.remove('hide');
       searchInfo.classList.remove('show');
     }
 });

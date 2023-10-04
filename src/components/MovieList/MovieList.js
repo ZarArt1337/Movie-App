@@ -1,6 +1,14 @@
 import {openModal, getVoteColor} from "../Modal/Modal.js";
 const API_KEY = "32ccb349a74920e218cca3e62608f9ab";
 const container = document.getElementById("container");
+const prev = document.getElementById('prev_page');
+const next = document.getElementById('next_page');
+const current = document.getElementById('current_page');
+const first = document.getElementById('first_page');
+
+let currentPage = 1;
+let nextPage = 2;
+let prevPage = '';
 
 //FETCHING DATA
 export function fetchMovies(type, category, extras) {
@@ -14,6 +22,23 @@ export function fetchMovies(type, category, extras) {
       console.log(data.results);
       if (data.results.length !== 0) {
         showMovies(data.results);
+        currentPage = data.page;
+        nextPage = currentPage + 1;
+        prevPage = currentPage - 1;
+
+        current.innerText = currentPage;
+        prev.innerText = prevPage;
+        next.innerText = nextPage;
+
+        if(currentPage <= 1){
+          prev.classList.add('hide');
+          first.classList.add('hide');
+        }else if(currentPage>2){
+          first.classList.remove('hide');
+        }else {
+          prev.classList.remove('hide');
+        }
+
       } else {
         container.innerHTML = '<h1 class="no_results">No results found.</h1>';
       }
@@ -61,3 +86,16 @@ export const showMovies = data => {
     });
   });
 };
+
+//PAGINATION
+document.getElementById('next_page').addEventListener("click", () => {
+  fetchMovies('movie','popular',`&page=${nextPage}`);
+});
+
+document.getElementById('prev_page').addEventListener("click", () => {
+  fetchMovies('movie','popular',`&page=${prevPage}`);
+});
+
+document.getElementById('first_page').addEventListener("click", () => {
+  fetchMovies('movie','popular','&page=1');
+});
