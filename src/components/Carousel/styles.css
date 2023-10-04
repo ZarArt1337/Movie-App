@@ -73,6 +73,7 @@
   margin: 0;
   z-index: 1;
   display: none;
+  white-space: nowrap;
 }
 
 .carousel_item:hover .carousel_hidden_context{
