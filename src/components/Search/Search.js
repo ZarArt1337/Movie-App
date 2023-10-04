@@ -4,14 +4,14 @@ const form = document.getElementById("form");
 const search = document.getElementById("search");
 
 form.addEventListener("keyup", e => {
-    e.preventDefault();
+  e.preventDefault();
   
-    const searchValue = search.value;
-      const extraSearching = `&query=${searchValue}`;
+  const searchValue = search.value;
+  const extraSearching = `&query=${searchValue}`;
   
   if(searchValue) {
-              fetchMovies('search','movie', extraSearching);
+    fetchMovies('search','movie', extraSearching);
     } else {
-        fetchMovies('movie','popular','');
+      fetchMovies('movie','popular','');
     }
-  });
+});
