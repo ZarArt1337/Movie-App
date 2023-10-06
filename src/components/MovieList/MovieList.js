@@ -1,10 +1,12 @@
 import {openModal, getVoteColor} from "../Modal/Modal.js";
 const API_KEY = "32ccb349a74920e218cca3e62608f9ab";
+const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 const container = document.getElementById("container");
 const prev = document.getElementById('prev_page');
 const next = document.getElementById('next_page');
 const current = document.getElementById('current_page');
 const first = document.getElementById('first_page');
+const myFavourite = document.getElementById("my_favourite");
 
 let currentPage = 1;
 let nextPage = 2;
@@ -47,17 +49,20 @@ export function fetchMovies(type, category, extras) {
 
 if (localStorage.getItem('favorite') === null) {
   localStorage.setItem('favorite',JSON.stringify(['start']));
-}
+}  
+
 
 //DISPLAYING DATA
 export const showMovies = data => {
   container.innerHTML = "";
+  // myFavourite.innerHtml = "";
   const savedMovies = JSON.parse(localStorage.getItem('favorite'));
   const myFav = savedMovies;
 
   data.forEach(movie => {
     const {name, poster_path, vote_average, overview, id, first_air_date, title, release_date} = movie;
     const movieEl = document.createElement("div");
+    const myFavEl = document.createElement("div");
     movieEl.classList.add("movie");
     movieEl.innerHTML = `
       <img src="${
@@ -84,12 +89,25 @@ export const showMovies = data => {
         <button class="more" id="${id}">Read more</button>
       </div>
     `;
-    
+
+    if (savedMovies.includes(`${id}`)) {
+      myFavEl.innerHTML = `
+      <img src="${
+        movie.poster_path
+          ? IMG_URL + movie.poster_path
+          : "http://via.placeholder.com/300x450"
+      }" alt="${movie.name}" class="img_modal">
+      `;
+    }
+
+    myFavourite.appendChild(myFavEl);
+
     container.appendChild(movieEl);
-    
+
     document.getElementById(id).addEventListener("click", () => {
       console.log(id);
       openModal(movie);
+      
 
       //MY FAVOURITE - LOCALSTORAGE
       const heart = document.querySelector('.heart-icon');
