@@ -45,9 +45,16 @@ export function fetchMovies(type, category, extras) {
   })
 };
 
+if (localStorage.getItem('favorite') === null) {
+  localStorage.setItem('favorite',JSON.stringify(['start']));
+}
+
 //DISPLAYING DATA
 export const showMovies = data => {
   container.innerHTML = "";
+  const savedMovies = JSON.parse(localStorage.getItem('favorite'));
+  const myFav = savedMovies;
+
   data.forEach(movie => {
     const {name, poster_path, vote_average, overview, id, first_air_date, title, release_date} = movie;
     const movieEl = document.createElement("div");
@@ -77,14 +84,43 @@ export const showMovies = data => {
         <button class="more" id="${id}">Read more</button>
       </div>
     `;
-
+    
     container.appendChild(movieEl);
-
+    
     document.getElementById(id).addEventListener("click", () => {
       console.log(id);
       openModal(movie);
+
+      //MY FAVOURITE - LOCALSTORAGE
+      const heart = document.querySelector('.heart-icon');
+
+      if (savedMovies.includes(`${id}`)) {
+        heart.classList.add('red_heart');
+      }
+
+      heart.addEventListener('click', ()=> {
+
+        if (heart.classList.contains('red_heart') && savedMovies.includes(`${id}`)) {
+          heart.classList.remove('red_heart');
+          var index = myFav.indexOf(`${id}`);
+
+          if (index !== -1) {
+             myFav.splice(index, 1);
+          }
+
+          localStorage.setItem('favorite',JSON.stringify(myFav));
+
+        } else {
+
+          heart.classList.add('red_heart');
+          myFav.push(`${id}`);
+          localStorage.setItem('favorite',JSON.stringify(myFav));
+
+        }  
+      });
     });
   });
+  console.log(savedMovies);
 };
 
 //PAGINATION

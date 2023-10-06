@@ -11,7 +11,8 @@ const generateModalHTML = movie => {
   return `
     <div class="modal_container">
       <span class="close">&times;</span>
-      <h3>Movie name: ${movie.name? movie.name: movie.title}</h3>
+      <h3>Movie name: ${movie.name? movie.name: movie.title}<span title="Add to favourite" class="heart-icon" id="heart-icon"> &#10084;</span></h3>
+      
       <div class="modal_content">
           <img src="${
             movie.poster_path

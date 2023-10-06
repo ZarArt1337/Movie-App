@@ -9,8 +9,21 @@ const prev = document.getElementById("btn_prev");
 next.addEventListener("click", e => {
   carousel.scrollBy(220, 0);
 });
+
 prev.addEventListener("click", e => {
   carousel.scrollBy(-220, 0);
+});
+
+document.addEventListener("keyup", e => {
+  if (e.key === "ArrowRight") {
+    carousel.scrollBy(660, 0);
+  }
+});
+
+document.addEventListener("keyup", e => {
+  if (e.key === "ArrowLeft") {
+    carousel.scrollBy(-660, 0);
+  }
 });
 
 //BUTTON ACTIVATED LIST
@@ -64,9 +77,11 @@ export function fetchTopLists(type, category, extras) {
   
 export const showTopLists = data => {
   carouselBox.innerHTML = "";
+  const savedMovies = JSON.parse(localStorage.getItem('favorite'));
+  const myFav = savedMovies;
   
   data.forEach(toplist => {
-    const {name, poster_path, vote_average, overview, id, first_air_date, title, release_date} = toplist;
+    const {name, poster_path, id, title} = toplist;
     const carouselEl = document.createElement("div");
     carouselEl.classList.add("carousel_item");
     carouselEl.innerHTML = `
@@ -82,6 +97,33 @@ export const showTopLists = data => {
       document.getElementById(id).addEventListener("click", () => {
         console.log(id);
         openModal(toplist);
+
+        //MY FAVOURITE - LOCALSTORAGE
+      const heart = document.querySelector('.heart-icon');
+
+      if (savedMovies.includes(`${id}`)) {
+        heart.classList.add('red_heart');
+      }
+
+      heart.addEventListener('click', ()=> {
+
+        if (heart.classList.contains('red_heart') && savedMovies.includes(`${id}`)) {
+          heart.classList.remove('red_heart');
+          var index = myFav.indexOf(`${id}`);
+
+          if (index !== -1) {
+             myFav.splice(index, 1);
+          }
+
+          localStorage.setItem('favorite',JSON.stringify(myFav));
+
+        } else {
+
+          heart.classList.add('red_heart');
+          myFav.push(`${id}`);
+          localStorage.setItem('favorite',JSON.stringify(myFav));
+          
+        }  
       });
   });
-};
+})};
