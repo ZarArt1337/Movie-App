@@ -1,6 +1,7 @@
 import {categories} from "./Categories.js";
 import { fetchMovies } from "../MovieList/MovieList.js";
 
+const pagination = document.getElementById('pagination');
 const getCategory = document.getElementById("categories");
 let selectedCategories = [];
 
@@ -28,7 +29,7 @@ function fetchByCategory() {
 			console.log(selectedCategories);
 			const extraCategory = `&with_genres=${selectedCategories}`;
 			fetchMovies('movie','popular', extraCategory);
-			highlightSelection();				
+			highlightSelection();
 		})
 		getCategory.append(categoryEl);
 	})
@@ -42,11 +43,14 @@ function highlightSelection() {
 		hideClearButton();
 	}) 
 	if(selectedCategories.length !=0){ 
+		pagination.classList.add('hide');
 		document.getElementById('clear_btn').classList.remove('hide'); 
 		selectedCategories.forEach(id => {
 			const hightlightedCategory = document.getElementById(id);
 			hightlightedCategory.classList.add('highlight');
 		})
+	} else {
+		pagination.classList.remove('hide');
 	}
 }
 
@@ -63,6 +67,7 @@ document.getElementById("clear_btn").addEventListener("click", () => {
 	removeHighlight();
 	fetchMovies('movie','popular','');
 	hideClearButton();
+	pagination.classList.remove('hide');
 })
 
 export function hideClearButton() {

@@ -1,4 +1,3 @@
-
 const modal = document.getElementById("myModal");
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 

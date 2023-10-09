@@ -79,7 +79,7 @@ export const showTopLists = data => {
   carouselBox.innerHTML = "";
   const savedMovies = JSON.parse(localStorage.getItem('favorite'));
   const myFav = savedMovies;
-  
+
   data.forEach(toplist => {
     const {name, poster_path, id, title} = toplist;
     const carouselEl = document.createElement("div");

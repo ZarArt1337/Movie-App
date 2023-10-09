@@ -23,14 +23,17 @@
     <header>
         <nav>
             <div class="font_Special">ZMovies</div>
+
+            
             <div>
                 <form id="form">
                     <input type="text" placeholder="Search" id="search" class="search">
                 </form>
             </div>
+            <button class="print-fav">My Favourites</button>
         </nav>
     </header>
-
+    
     <!--TOP Lists-->
     <div id="lists">
         <div id="top_rated_movies" class="lists_btn lists_btn_active">TOP-Rated Movies</div>
@@ -50,8 +53,11 @@
     <div id="categories"></div>
     <div class="clear_categories"><div id="clear_btn" class="hide category">Clear ALL</div></div>
 
-    
-    <div class="my_favourite" id="my_favourite"></div>
+    <!--My favourites-->
+    <div class="favourite_box">
+        <div class="close_favourite hide" id="close_favourite">X Close Favourite</div>
+        <div class="my_favourite" id="my_favourite"></div>
+    </div>
 
     <!--Searching info-->
     <div class="search_info" id="search_info"></div>
