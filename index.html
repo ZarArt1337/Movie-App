@@ -27,7 +27,8 @@
             
             <div>
                 <form id="form">
-                    <input type="text" placeholder="Search" id="search" class="search">
+                    <i class="fa fa-search"></i>
+                    <input type="text" placeholder="" id="search" class="search">
                 </form>
             </div>
             <button class="print-fav">My Favourites</button>
@@ -51,11 +52,14 @@
 
     <!--Categories-->
     <div id="categories"></div>
-    <div class="clear_categories"><div id="clear_btn" class="hide category">Clear ALL</div></div>
+    <div class="clear_categories">
+        <div id="clear_btn" class="hide category">Clear ALL</div>
+    </div>
 
     <!--My favourites-->
-    <div class="favourite_box">
-        <div class="close_favourite hide" id="close_favourite">X Close Favourite</div>
+    <div class="favourite_box hide" id="favourite_box">
+        <h3 class="my_favourite_tag" id="my_favourite_tag">My favourites:</h3>
+        <span class="close_button" id="close_button">X</span>
         <div class="my_favourite" id="my_favourite"></div>
     </div>
 

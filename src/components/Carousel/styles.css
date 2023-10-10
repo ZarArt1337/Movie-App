@@ -30,23 +30,19 @@
 
 .btn_prev, .btn_next {
     position: absolute;
-    top: 275px;
+    top: 40%;
     z-index: 100;
     color: rgb(84, 167, 87);
     font-size: 40px;
-    border: rgb(84, 167, 87) solid 1px;
-    border-radius: 30px;
-    padding-left: 15px;
-    padding-right: 15px;
-    background-color: rgb(84, 167, 87, 0.3);
+    user-select: none;
 }
 
 .btn_next {
-    right: 30px;
+    right: 60px;
 }
 
 .btn_prev {
-    left: 30px;
+    left: 60px;
 }
 
 .btn_prev:hover, .btn_next:hover {

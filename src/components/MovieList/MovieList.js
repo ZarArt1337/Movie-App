@@ -6,7 +6,8 @@ const next = document.getElementById('next_page');
 const current = document.getElementById('current_page');
 const first = document.getElementById('first_page');
 const myFavourite = document.getElementById("my_favourite");
-const closeFavourite = document.getElementById("close_favourite");
+const closeFavourite = document.getElementById("close_button");
+const boxFavourite = document.getElementById("favourite_box");
 
 let currentPage = 1;
 let nextPage = 2;
@@ -221,10 +222,9 @@ document.getElementById('first_page').addEventListener("click", () => {
 document.querySelector(".print-fav").addEventListener("click", () => {
   showFavoriteMovies();
   myFavourite.classList.remove('hide');
-  closeFavourite.classList.remove('hide');
+  boxFavourite.classList.remove('hide');
 });
 
 closeFavourite.addEventListener("click", () => {
-  closeFavourite.classList.add('hide');
-  myFavourite.classList.add('hide');
+  boxFavourite.classList.add('hide');
 });
