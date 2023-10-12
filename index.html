@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="src/components/Modal/styles.css">
     <link rel="stylesheet" href="src/components/CategoryFilter/styles.css">
     <link rel="stylesheet" href="src/components/Search/styles.css">
-    <link rel="stylesheet" href="src/components/Carousel/styles.css">
 
     <title>ZMovies</title>
 </head>
@@ -24,36 +23,24 @@
         <nav>
             <div class="font_Special">ZMovies</div>
 
-            
-            <div>
+            <div class="nav_search">
                 <form id="form">
                     <i class="fa fa-search"></i>
                     <input type="text" placeholder="" id="search" class="search">
                 </form>
             </div>
-            <button class="print-fav">My Favourites</button>
+            <div class="nav_button">
+                <button class="print-fav">My Favourites</button>
+            </div>
+            <div class="nav_burger" id="icon">
+                <i class="fa fa-bars"></i>
+            </div>
         </nav>
     </header>
-    
-    <!--TOP Lists-->
-    <div id="lists">
-        <div id="top_rated_movies" class="lists_btn lists_btn_active">TOP-Rated Movies</div>
-        <div id="popular_movies" class="lists_btn">Popular Movies</div>
-        <div id="top_rated_series" class="lists_btn">TOP-Rated Series</div>
-        <div id="popular_series" class="lists_btn">Popular Series</div>
-    </div>
 
-    <!--Carousel-->
-    <div class="carousel" id="carousel">
-        <div id="carousel_box" class="carousel_box"></div>
-        <div class="btn_prev" id="btn_prev">&#60;</div>
-        <div class="btn_next" id="btn_next">&#62;</div>
-    </div>
-
-    <!--Categories-->
-    <div id="categories"></div>
-    <div class="clear_categories">
-        <div id="clear_btn" class="hide category">Clear ALL</div>
+    <!--Burger menu-->
+    <div id="burgerLinks" class="burger_links"> 
+        <div class="print_fav_burger">My Favourites</div>
     </div>
 
     <!--My favourites-->
@@ -63,6 +50,34 @@
         <div class="my_favourite" id="my_favourite"></div>
     </div>
 
+    <!--TOP Lists-->
+    <div id="lists">
+        <div id="top_rated_movies" class="lists_btn lists_btn_active">TOP-Rated Movies</div>
+        <div id="top_rated_series" class="lists_btn">TOP-Rated Series</div>
+
+        <div class="top_lists" id="top_lists"></div>
+    
+        <button class="display_button" id="display_lists">More movies</button>
+        <button class="display_button hide" id="hide_lists">Hide</button> 
+    </div>
+
+    <!--Lists-->
+       
+
+    <!--Categories-->
+    <div id="show_categories">
+        <div class="sort_categories">Sort by categories:</div>
+        <div id="categories"></div>
+        
+        <div class="clear_categories">
+            <div id="clear_btn" class="hide category">Clear ALL</div>
+        </div>
+
+
+        <button class="display_button" id="display_categories">More categories</button>
+        <button class="display_button hide" id="hide_categories">Hide</button>
+    </div>
+    
     <!--Searching info-->
     <div class="search_info" id="search_info"></div>
 
@@ -90,6 +105,5 @@
 <script src="src/components/Modal/Modal.js" type="module"></script>
 <script src="src/components/Search/Search.js" type="module"></script>
 <script src="src/components/CategoryFilter/CategoryFilter.js" type="module"></script>
-<script src="src/components/Carousel/Carousel.js" type="module"></script>
 <script src="main.js" type="module"></script>
 </html>

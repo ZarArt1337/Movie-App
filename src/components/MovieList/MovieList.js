@@ -1,4 +1,6 @@
 import {openModal, getVoteColor} from "../Modal/Modal.js";
+import {closeBurger} from "../../../main.js";
+
 const API_KEY = "32ccb349a74920e218cca3e62608f9ab";
 const container = document.getElementById("container");
 const prev = document.getElementById('prev_page');
@@ -8,6 +10,7 @@ const first = document.getElementById('first_page');
 const myFavourite = document.getElementById("my_favourite");
 const closeFavourite = document.getElementById("close_button");
 const boxFavourite = document.getElementById("favourite_box");
+const topLists = document.getElementById("top_lists");
 
 let currentPage = 1;
 let nextPage = 2;
@@ -63,7 +66,6 @@ export const showMovies = data => {
 
     movieEl.classList.add("movie");
     movieEl.innerHTML = generateMovieHTML(movie);
-
     container.appendChild(movieEl);
 
     document.getElementById(id).addEventListener("click", () => {
@@ -73,6 +75,100 @@ export const showMovies = data => {
     });
   });
 };
+
+//GENERATING HTML TO DISPLAY MOVIES
+const generateMovieHTML = (movie) => {
+  return `
+    <img src="${
+      movie.poster_path
+        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+        : "http://via.placeholder.com/300x450"
+    }" alt="${movie.title}">
+    <div class="movie-info">
+      <h3> ${
+        movie.title.length >= 30
+          ? movie.title.substr(0, 30) + "..."
+          : movie.title
+      }</h3>
+      <span class="${getVoteColor(movie.vote_average)}">${movie.vote_average}</span>
+    </div>
+    <div class="overview">
+      <h3>Overview</h3>
+      ${
+        movie.overview.length >= 300
+          ? movie.overview.substr(0, 300) + "..."
+          : movie.overview
+      }
+      <br/>
+      <button class="more" id="${movie.id}">Read more</button>
+    </div>`;
+}
+
+//FETCHING DATA FOR TOPLISTS
+export function fetchTopLists(type, category, extras) {
+  let baseURL = 'https://api.themoviedb.org/3/';
+  let apiKey = `api_key=${API_KEY}`;
+  let url = `${baseURL}${type}/${category}?${apiKey}${extras}`;
+    
+  fetch(url)
+  .then(res => res.json())
+  .then(data => {
+    console.log(data.results);
+    showTopLists(data.results);
+  })
+};
+  
+export const showTopLists = data => {
+  topLists.innerHTML = "";
+  const savedMovies = JSON.parse(localStorage.getItem('favorite'));
+  const myFav = savedMovies;
+
+  data.forEach(movie => {
+    const {name, poster_path, id, title} = movie;
+    const topListsEl = document.createElement("div");
+    topListsEl.classList.add("list_item");
+    topListsEl.innerHTML = `
+      <img class ='list_img' src="${
+        poster_path
+          ? `https://image.tmdb.org/t/p/w200${poster_path}`
+          : "http://via.placeholder.com/300x450"
+      }" alt="${name?name:title}">
+      <span class="${getVoteColor(movie.vote_average)} top_average">${movie.vote_average}</span>
+      <div class="list_hidden_context" id="${id}">Read more</div>`;
+  
+  topLists.appendChild(topListsEl);
+  
+  document.getElementById(id).addEventListener("click", () => {
+    console.log(id);
+    openModal(movie);
+    heartChecking(movie);
+  });
+})};
+
+//BUTTON ACTIVE LIST
+const activeListButton = active => {
+  const activeOn = document.querySelectorAll(".lists_btn_active");
+   
+  if (activeOn.length != 0) {
+    activeOn.forEach(active =>{
+      active.classList.remove("lists_btn_active");
+    })
+    document.getElementById(active).classList.add("lists_btn_active");
+  } else {
+    document.getElementById(active).classList.add("lists_btn_active");
+  }
+}
+  
+//CHOSING TOP LIST
+document.getElementById("top_rated_movies").addEventListener("click", () => {
+  fetchTopLists('movie','top_rated','');
+  activeListButton("top_rated_movies");
+})
+  
+document.getElementById("top_rated_series").addEventListener("click", () => {
+  fetchTopLists('tv','top_rated','');
+  activeListButton("top_rated_series");
+})
 
 //DISPLAYING FAVOURITE MOVIES
 export const showFavoriteMovies = () => { 
@@ -99,30 +195,6 @@ export const showFavoriteMovies = () => {
       });
   });
 };
-
-//GENERATING HTML TO DISPLAY MOVIES
-const generateMovieHTML = movie => {
-  return `
-    <img src="${
-      movie.poster_path
-        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-        : "http://via.placeholder.com/300x450"
-    }" alt="${movie.title}">
-    <div class="movie-info">
-      <h3>${movie.title}</h3>
-      <span class="${getVoteColor(movie.vote_average)}">${movie.vote_average}</span>
-    </div>
-    <div class="overview">
-      <h3>Overview</h3>
-      ${
-        movie.overview.length >= 300
-          ? movie.overview.substr(0, 300) + "..."
-          : movie.overview
-      }
-      <br/>
-      <button class="more" id="${movie.id}">Read more</button>
-    </div>`;
-}
 
 //MY FAVOURITE - LOCALSTORAGE
 const heartChecking = movie => {
@@ -159,6 +231,14 @@ document.querySelector(".print-fav").addEventListener("click", () => {
   showFavoriteMovies();
   myFavourite.classList.remove('hide');
   boxFavourite.classList.remove('hide');
+  boxFavourite.scrollIntoView({behavior: 'smooth'}, true);
+});
+
+document.querySelector(".print_fav_burger").addEventListener("click", () => {
+  showFavoriteMovies();
+  myFavourite.classList.remove('hide');
+  boxFavourite.classList.remove('hide');
+  closeBurger();
 });
 
 closeFavourite.addEventListener("click", () => {
@@ -177,3 +257,6 @@ document.getElementById('prev_page').addEventListener("click", () => {
 document.getElementById('first_page').addEventListener("click", () => {
   fetchMovies('movie','popular','&page=1');
 });
+
+
+  

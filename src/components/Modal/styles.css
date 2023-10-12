@@ -15,10 +15,10 @@
 }
   
 .modal_container {
-    background-color: #0a3703;
+    background: radial-gradient(#01852b, #004c18);
     margin: auto;
-    padding: 30px;
-    width: 60%;
+    padding: 20px;
+    width: 90%;
     color: white;
 }
 
@@ -30,9 +30,30 @@
     float: left;
 }
 
+@media (max-width: 576px) {
+    .img_modal {
+        width: 250px;
+        float: none;
+    }
+
+    .modal_content {
+        display: block !important;
+    }
+
+    .modal_container {
+        text-align: center;
+    }
+}
+
+@media (min-width: 576px) {
+    .img_modal {
+        width: 250px;
+    }
+}
+
 .modal_content {
     display: flex;
-    padding: 20px 0 20px 0;
+
 }
 
 .modal_other_info p {
@@ -44,10 +65,6 @@
 .modal_other_info {
     display: flex;
     flex-direction: column;
-}
-
-.active {
-    display: block;
 }
 
 /* Vote average colors */

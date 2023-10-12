@@ -7,10 +7,18 @@
     margin: 10px;
 }
 
+#categories {
+    height: 45px;
+    overflow: hidden;
+}
+
+.show_more_categories {
+    height: auto !important;
+}
+
 .category, .lists_btn{
     color:white;
     padding: 10px 20px;
-    background-color: orange;
     border-radius: 10px;
     margin: 5px;
     display: inline-block;
@@ -18,13 +26,21 @@
     font-size: 14px;
 }
 
+.category {
+    color:#003b0f;
+    background: radial-gradient(#ffcc00, orange);
+}
+
 .category:hover {
-    background-color: green;
+    background: radial-gradient(green, #005700);
+    color: white;
 }
 
 /*Highlight buttons*/
 .highlight{
-    background-color: red;
+    /* background-color: red !important; */
+    background: radial-gradient(#ff6600, red);
+    color: white;
 }
 
 /* Clearing button */
@@ -35,7 +51,7 @@
 #clear_btn {
     color:white;
     padding: 10px 20px;
-    background-color: red;
+    background: radial-gradient(orangered, red);
     border-radius: 10px;
     margin: 5px;
     cursor: pointer;
@@ -51,3 +67,13 @@
     padding: 20px;
 }
 
+/* Sort categories text */
+.sort_categories {
+    background-color: #01791f;
+    text-align: center;
+    color: white;
+    margin: 20px 20px 0 20px;
+    padding: 5px;
+    font-family: 'Caveat', cursive;
+    font-size: 25px;
+  }

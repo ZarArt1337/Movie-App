@@ -47,7 +47,7 @@
 
 /* Read more button */
 .more{
-    background-color: orange;
+    background: radial-gradient(#ffbf00, orange);
     color:white;
     font-size: 16px;
     border: 0;
@@ -55,6 +55,12 @@
     padding: 10px 20px;
     margin-top: 5px;
     cursor: pointer;
+    color:#003b0f;
+}
+
+.more:hover {
+    background: radial-gradient(green, #005700);
+    color: white;
 }
 
 /* Pagination */
@@ -114,12 +120,13 @@
     border: 2px solid #003b0f;
     padding: 0.5rem 1rem;
     border-radius: 10px;
-    background-color: orange;
+    background: radial-gradient(#ffcc00, orange);
     cursor: pointer;
+    color:#003b0f;
 }
 
 .print-fav:hover {
-    background-color: #003b0f;
+    background: radial-gradient(green, #005700);
     color: white;
 }
 
@@ -141,7 +148,7 @@
 .favourite_box {
     display: block;
     text-align: center;
-    background-color: #063212;
+    background-color:  #001f0a;
     position: relative;
 }
 
@@ -149,4 +156,71 @@
     color: white;
     text-transform: uppercase;
     padding-top: 20px;
+}
+
+/* TOP Lists */
+.top_lists {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 250px;
+    overflow: hidden;
+}
+
+.list_item {
+  padding: 10px;
+  position: relative;
+}
+
+.list_img {
+  width: 150px;;
+  border-radius: 5px;
+  position: relative;
+  box-shadow: 0px 0px 10px 0px #54a757;
+}
+
+.list_item:hover .list_img {
+  opacity: 30%;
+}
+
+.lists_btn {
+  background: radial-gradient(#00581c, #004215);  
+}
+
+.lists_btn_active, .lists_btn:hover {
+  background: radial-gradient(green, #005700);
+}
+
+.list_hidden_context {
+  position: absolute;
+  top: 100px;
+  left: -10px;
+  color: white;
+  transform: translateX(50%);
+  background: radial-gradient(#00581c, #004215);
+  padding: 10px;
+  border-radius: 10px;
+  margin: 0;
+  z-index: 1;
+  display: none;
+  white-space: nowrap;
+}
+
+.list_item:hover .list_hidden_context{
+  cursor: pointer;
+  display: block;
+}
+
+.list_hidden_context:hover {
+  background: radial-gradient(green, #005700);
+  color: white;
+}
+
+.top_average {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #001f0a;
+    border-radius: 20px;
+    padding: 10px;
 }

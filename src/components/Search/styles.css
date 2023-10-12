@@ -1,8 +1,8 @@
 .search{
     background-color: transparent;
-    border: 1px solid #003b0f;
+    border-bottom: 1px solid #003b0f !important;
+    border: none;
     padding: 0.5rem 1rem;
-    border-radius: 0 10px 10px 0;
     font-size: 1rem;
     width: 180px;
 }
@@ -33,7 +33,7 @@
 }
 
 form i {
-    border: solid 1px #003b0f;
+
     padding: 10px;
     border-radius: 10px 0 0 10px;
     margin: 0;

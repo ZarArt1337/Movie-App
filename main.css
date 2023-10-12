@@ -1,40 +1,117 @@
 *{
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    background-color: #001607;
-    font-family: 'Roboto', sans-serif;
+  background-color: #001607;
+  background: radial-gradient(#01852b, #001607);
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 header {
-    background-color: orange;
-    padding: 15px;
+  background: radial-gradient(#ffdd00, orange);
+  padding: 15px;
 }
 
 footer {
-    background-color: orange;
-    color: #000000;
-    text-align: center;
-    padding: 1rem;
+  background: radial-gradient(#ffdd00, orange);
+  color: #000000;
+  text-align: center;
+  padding: 1rem;
 }
 
 nav {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-self: center;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-self: center;
 }
 
 .font_Special {
-    color: #0c3b00;
-    font-family: 'Caveat', cursive;
-    font-size: 2rem;
+  color: #0c3b00;
+  font-family: 'Caveat', cursive;
+  font-size: 2rem;
 }
 
 main{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.active {
+  display: block !important;
+}
+
+#icon {
+  display: none;
+  font-size: 30px;
+  cursor: pointer;
+  color:#003b0f;
+  margin-right: 10px;
+}
+
+.burger_links {
+  display: none;
+  background-color: orange;
+  color: white;
+  padding: 10px;
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+}
+
+.print_fav_burger {
+  padding: 10px;
+  cursor: pointer;
+  color:#003b0f;
+}
+
+.nav_burger {
+  padding-left: 20px;
+}
+
+.display_button {
+  display: block;
+  color: orange;
+  cursor: pointer;
+  margin-bottom: 20px;
+  background-color: transparent;
+  border: 1px solid orange;
+  padding: 10px;
+  border-radius: 10px;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.display_button:hover {
+  background: radial-gradient(#ffdd00, orange);
+  color:#003b0f;
+}
+
+@media (min-width: 1020px) {
+  #display_categories, #hide_categories {
+    display: none;
+  }
+
+  #categories {
+    height: auto !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .nav_button{
+   display: none;
+ }
+
+ #icon {
+     display: block;
+ }
+
+ .search {
+   width: 120px !important;
+ }
 }

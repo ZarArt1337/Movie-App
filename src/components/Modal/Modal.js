@@ -24,7 +24,7 @@ const generateModalHTML = movie => {
                 movie.vote_average
               )}">${movie.vote_average}</span></p>
               <p>Release date: ${movie.first_air_date? movie.first_air_date: movie.release_date}</p>
-                            <p>${movie.overview}</p>
+              <p>${movie.overview}</p>
           </div>
       </div>
     </div>`;
