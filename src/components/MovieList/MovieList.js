@@ -1,12 +1,12 @@
-import {openModal, getVoteColor} from "../Modal/Modal.js";
-import {closeBurger} from "../../../main.js";
+import { openModal, getVoteColor } from "../Modal/Modal.js";
+import { closeBurger } from "../../../main.js";
 
 const API_KEY = "32ccb349a74920e218cca3e62608f9ab";
 const container = document.getElementById("container");
-const prev = document.getElementById('prev_page');
-const next = document.getElementById('next_page');
-const current = document.getElementById('current_page');
-const first = document.getElementById('first_page');
+const prev = document.getElementById("prev_page");
+const next = document.getElementById("next_page");
+const current = document.getElementById("current_page");
+const first = document.getElementById("first_page");
 const myFavourite = document.getElementById("my_favourite");
 const closeFavourite = document.getElementById("close_button");
 const boxFavourite = document.getElementById("favourite_box");
@@ -14,17 +14,17 @@ const topLists = document.getElementById("top_lists");
 
 let currentPage = 1;
 let nextPage = 2;
-let prevPage = '';
+let prevPage = "";
 
 //FETCHING DATA
 export function fetchMovies(type, category, extras) {
-  let baseURL = 'https://api.themoviedb.org/3/';
+  let baseURL = "https://api.themoviedb.org/3/";
   let apiKey = `api_key=${API_KEY}`;
   let url = `${baseURL}${type}/${category}?${apiKey}${extras}`;
-  
+
   fetch(url)
-  .then(res => res.json())
-  .then(data => {
+    .then(res => res.json())
+    .then(data => {
       console.log(data.results);
       if (data.results.length !== 0) {
         showMovies(data.results);
@@ -36,32 +36,40 @@ export function fetchMovies(type, category, extras) {
         prev.innerText = prevPage;
         next.innerText = nextPage;
 
-        if(currentPage <= 1){
-          prev.classList.add('hide');
-          first.classList.add('hide');
-        }else if(currentPage>2){
-          first.classList.remove('hide');
-        }else {
-          prev.classList.remove('hide');
+        if (currentPage <= 1) {
+          prev.classList.add("hide");
+          first.classList.add("hide");
+        } else if (currentPage > 2) {
+          first.classList.remove("hide");
+        } else {
+          prev.classList.remove("hide");
         }
-
       } else {
         container.innerHTML = '<h1 class="no_results">No results found.</h1>';
       }
-  })
-};
+    });
+}
 
 //CREATING LOCALSTORAGE
-if (localStorage.getItem('favorite') === null) {
-  localStorage.setItem('favorite',JSON.stringify(['start']));
-}  
+if (localStorage.getItem("favorite") === null) {
+  localStorage.setItem("favorite", JSON.stringify(["start"]));
+}
 
 //DISPLAYING DATA
 export const showMovies = data => {
   container.innerHTML = "";
 
   data.forEach(movie => {
-    const {name, poster_path, vote_average, overview, id, first_air_date, title, release_date} = movie;
+    const {
+      name,
+      poster_path,
+      vote_average,
+      overview,
+      id,
+      first_air_date,
+      title,
+      release_date
+    } = movie;
     const movieEl = document.createElement("div");
 
     movieEl.classList.add("movie");
@@ -71,13 +79,13 @@ export const showMovies = data => {
     document.getElementById(id).addEventListener("click", () => {
       console.log(id);
       openModal(movie);
-      heartChecking(movie);
+      // heartChecking(movie);
     });
   });
 };
 
 //GENERATING HTML TO DISPLAY MOVIES
-const generateMovieHTML = (movie) => {
+const generateMovieHTML = movie => {
   return `
     <img src="${
       movie.poster_path
@@ -90,7 +98,9 @@ const generateMovieHTML = (movie) => {
           ? movie.title.substr(0, 30) + "..."
           : movie.title
       }</h3>
-      <span class="${getVoteColor(movie.vote_average)}">${movie.vote_average}</span>
+      <span class="${getVoteColor(movie.vote_average)}">${
+    movie.vote_average
+  }</span>
     </div>
     <div class="overview">
       <h3>Overview</h3>
@@ -102,29 +112,29 @@ const generateMovieHTML = (movie) => {
       <br/>
       <button class="more" id="${movie.id}">Read more</button>
     </div>`;
-}
+};
 
 //FETCHING DATA FOR TOPLISTS
 export function fetchTopLists(type, category, extras) {
-  let baseURL = 'https://api.themoviedb.org/3/';
+  let baseURL = "https://api.themoviedb.org/3/";
   let apiKey = `api_key=${API_KEY}`;
   let url = `${baseURL}${type}/${category}?${apiKey}${extras}`;
-    
+
   fetch(url)
-  .then(res => res.json())
-  .then(data => {
-    console.log(data.results);
-    showTopLists(data.results);
-  })
-};
-  
+    .then(res => res.json())
+    .then(data => {
+      console.log(data.results);
+      showTopLists(data.results);
+    });
+}
+
 export const showTopLists = data => {
   topLists.innerHTML = "";
-  const savedMovies = JSON.parse(localStorage.getItem('favorite'));
+  const savedMovies = JSON.parse(localStorage.getItem("favorite"));
   const myFav = savedMovies;
 
   data.forEach(movie => {
-    const {name, poster_path, id, title} = movie;
+    const { name, poster_path, id, title } = movie;
     const topListsEl = document.createElement("div");
     topListsEl.classList.add("list_item");
     topListsEl.innerHTML = `
@@ -132,49 +142,52 @@ export const showTopLists = data => {
         poster_path
           ? `https://image.tmdb.org/t/p/w200${poster_path}`
           : "http://via.placeholder.com/300x450"
-      }" alt="${name?name:title}">
-      <span class="${getVoteColor(movie.vote_average)} top_average">${movie.vote_average}</span>
+      }" alt="${name ? name : title}">
+      <span class="${getVoteColor(movie.vote_average)} top_average">${
+      movie.vote_average
+    }</span>
       <div class="list_hidden_context" id="${id}">Read more</div>`;
-  
-  topLists.appendChild(topListsEl);
-  
-  document.getElementById(id).addEventListener("click", () => {
-    console.log(id);
-    openModal(movie);
-    heartChecking(movie);
+
+    topLists.appendChild(topListsEl);
+
+    document.getElementById(id).addEventListener("click", () => {
+      console.log(id);
+      openModal(movie);
+      heartChecking(movie);
+    });
   });
-})};
+};
 
 //BUTTON ACTIVE LIST
 const activeListButton = active => {
   const activeOn = document.querySelectorAll(".lists_btn_active");
-   
+
   if (activeOn.length != 0) {
-    activeOn.forEach(active =>{
+    activeOn.forEach(active => {
       active.classList.remove("lists_btn_active");
-    })
+    });
     document.getElementById(active).classList.add("lists_btn_active");
   } else {
     document.getElementById(active).classList.add("lists_btn_active");
   }
-}
-  
+};
+
 //CHOSING TOP LIST
 document.getElementById("top_rated_movies").addEventListener("click", () => {
-  fetchTopLists('movie','top_rated','');
+  fetchTopLists("movie", "top_rated", "");
   activeListButton("top_rated_movies");
-})
-  
+});
+
 document.getElementById("top_rated_series").addEventListener("click", () => {
-  fetchTopLists('tv','top_rated','');
+  fetchTopLists("tv", "top_rated", "");
   activeListButton("top_rated_series");
-})
+});
 
 //DISPLAYING FAVOURITE MOVIES
-export const showFavoriteMovies = () => { 
+export const showFavoriteMovies = () => {
   myFavourite.innerHTML = "";
   const savedMovie = JSON.parse(localStorage.getItem("favorite"));
-  
+
   savedMovie.forEach(id => {
     fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`)
       .then(res => res.json())
@@ -191,72 +204,39 @@ export const showFavoriteMovies = () => {
           console.log(id);
           openModal(movie);
           heartChecking(movie);
-        })
+        });
       });
   });
 };
 
-//MY FAVOURITE - LOCALSTORAGE
-const heartChecking = movie => {
-
-  const heart = document.querySelector('.heart-icon');
-  const savedMovies = JSON.parse(localStorage.getItem("favorite"));
-
-  if (savedMovies.includes(`${movie.id}`)) {
-    heart.classList.add('red_heart');
-  }
-
-  heart.addEventListener('click', ()=> {
-
-    if (heart.classList.contains('red_heart') && savedMovies.includes(`${movie.id}`)) {
-      heart.classList.remove('red_heart');
-      var index = savedMovies.indexOf(`${movie.id}`);
-
-      if (index !== -1) {
-         savedMovies.splice(index, 1);
-      }
-
-      localStorage.setItem('favorite',JSON.stringify(savedMovies));
-
-    } else {
-      heart.classList.add('red_heart');
-      savedMovies.push(`${movie.id}`);
-      localStorage.setItem('favorite',JSON.stringify(savedMovies));
-    }  
-  });
-}
-
 //MY FAVOURITE OPEN & CLOSE
 document.querySelector(".print-fav").addEventListener("click", () => {
   showFavoriteMovies();
-  myFavourite.classList.remove('hide');
-  boxFavourite.classList.remove('hide');
-  boxFavourite.scrollIntoView({behavior: 'smooth'}, true);
+  myFavourite.classList.remove("hide");
+  boxFavourite.classList.remove("hide");
+  boxFavourite.scrollIntoView({ behavior: "smooth" }, true);
 });
 
 document.querySelector(".print_fav_burger").addEventListener("click", () => {
   showFavoriteMovies();
-  myFavourite.classList.remove('hide');
-  boxFavourite.classList.remove('hide');
+  myFavourite.classList.remove("hide");
+  boxFavourite.classList.remove("hide");
   closeBurger();
 });
 
 closeFavourite.addEventListener("click", () => {
-  boxFavourite.classList.add('hide');
+  boxFavourite.classList.add("hide");
 });
 
 //PAGINATION
-document.getElementById('next_page').addEventListener("click", () => {
-  fetchMovies('movie','popular',`&page=${nextPage}`);
+document.getElementById("next_page").addEventListener("click", () => {
+  fetchMovies("movie", "popular", `&page=${nextPage}`);
 });
 
-document.getElementById('prev_page').addEventListener("click", () => {
-  fetchMovies('movie','popular',`&page=${prevPage}`);
+document.getElementById("prev_page").addEventListener("click", () => {
+  fetchMovies("movie", "popular", `&page=${prevPage}`);
 });
 
-document.getElementById('first_page').addEventListener("click", () => {
-  fetchMovies('movie','popular','&page=1');
+document.getElementById("first_page").addEventListener("click", () => {
+  fetchMovies("movie", "popular", "&page=1");
 });
-
-
-  
