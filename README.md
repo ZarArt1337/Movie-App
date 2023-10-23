@@ -9,6 +9,10 @@ Movies website build with JavaScript. Using TMDB API to displaying data about mo
 <img src="https://github.com/ZarArt1337/Movie-App/assets/132918164/6c517753-5b60-4899-9524-b9e79bb5e254" width="30">
 
 # Demo:
+
+https://movie-app-inky-xi.vercel.app/
+
+
 <img src="https://github.com/ZarArt1337/Movie-App/assets/132918164/c774033b-66b6-4981-9500-abc2fc1fade4" width="500">
 
 
