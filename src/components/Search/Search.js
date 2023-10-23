@@ -4,10 +4,10 @@ const form = document.getElementById("form");
 const search = document.getElementById("search");
 const lists = document.getElementById("lists");
 const categories = document.getElementById('categories');
-const searchInfo = document.getElementById('search_info');
+const searchInfo = document.getElementById('search-info');
 const pagination = document.getElementById('pagination');
-const boxFavourite = document.getElementById("favourite_box");
-const hideCategories = document.getElementById("show_categories");
+const boxFavourite = document.getElementById("favourite-box");
+const hideCategories = document.getElementById("show-categories");
 
 form.addEventListener("keyup", e => {
 

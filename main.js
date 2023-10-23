@@ -28,35 +28,35 @@ document.addEventListener('mouseup', function(e) {
 });
 
 //MORE CATEGORIES LIST
-const moreCategories = document.getElementById("display_categories");
+const moreCategories = document.getElementById("display-categories");
 const categories = document.getElementById("categories");
-const hideCategories = document.getElementById("hide_categories");
+const hideCategories = document.getElementById("hide-categories");
 
 moreCategories.addEventListener("click", () => {
-  categories.classList.add('show_more_categories');
+  categories.classList.add('show-more-categories');
   hideCategories.classList.remove('hide');
   moreCategories.classList.add('hide');
 });
   
 hideCategories.addEventListener("click", () => {
-    categories.classList.remove('show_more_categories');
+    categories.classList.remove('show-more-categories');
     moreCategories.classList.remove('hide');
     hideCategories.classList.add('hide');
 });
   
 //MORE LIST
-const moreLists = document.getElementById("display_lists");
-const lists = document.getElementById("top_lists");
-const hideLists = document.getElementById("hide_lists");
+const moreLists = document.getElementById("display-lists");
+const lists = document.getElementById("top-lists");
+const hideLists = document.getElementById("hide-lists");
 
 moreLists.addEventListener("click", () => {
-  lists.classList.add('show_more_categories');
+  lists.classList.add('show-more-categories');
   hideLists.classList.remove('hide');
   moreLists.classList.add('hide');
 });
   
 hideLists.addEventListener("click", () => {
-    lists.classList.remove('show_more_categories');
+    lists.classList.remove('show-more-categories');
     moreLists.classList.remove('hide');
     hideLists.classList.add('hide');
 });

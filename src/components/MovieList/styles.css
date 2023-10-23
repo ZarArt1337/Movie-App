@@ -73,17 +73,17 @@
     font-weight: 600;
 }
 
-.prev_page, .next_page{
+.prev-page, .next-page{
     padding:20px;
     cursor:pointer;
 }
 
-.first_page {
+.first-page {
     padding: 20px 0 20px 0;
     cursor: pointer;
 }
 
-.current_page{
+.current-page{
     padding: 10px 15px;
     border-radius: 10px;
     border: 5px solid orange;
@@ -103,11 +103,11 @@
     cursor: pointer;
 }
 
-.red_heart {
+.red-heart {
     color:red !important;
 }
 
-.my_favourite {
+.my-favourite {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -130,7 +130,7 @@
     color: white;
 }
 
-.favourite_box .close_button {
+.favourite-box .close-button {
     cursor: pointer;
     border-radius: 20px;
     border:solid;
@@ -141,25 +141,25 @@
     right: 15px;
 }
 
-.close_button:hover {
+.close-button:hover {
     color: white;
 }
 
-.favourite_box {
+.favourite-box {
     display: block;
     text-align: center;
     background-color:  #001f0a;
     position: relative;
 }
 
-.my_favourite_tag {
+.my-favourite-tag {
     color: white;
     text-transform: uppercase;
     padding-top: 20px;
 }
 
 /* TOP Lists */
-.top_lists {
+.top-lists {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -167,31 +167,31 @@
     overflow: hidden;
 }
 
-.list_item {
+.list-item {
   padding: 10px;
   position: relative;
 }
 
-.list_img {
+.list-img {
   width: 150px;;
   border-radius: 5px;
   position: relative;
   box-shadow: 0px 0px 10px 0px #54a757;
 }
 
-.list_item:hover .list_img {
+.list-item:hover .list-img {
   opacity: 30%;
 }
 
-.lists_btn {
+.lists-btn {
   background: radial-gradient(#00581c, #004215);  
 }
 
-.lists_btn_active, .lists_btn:hover {
+.lists-btn-active, .lists-btn:hover {
   background: radial-gradient(green, #005700);
 }
 
-.list_hidden_context {
+.list-hidden-context {
   position: absolute;
   top: 100px;
   left: -10px;
@@ -206,17 +206,17 @@
   white-space: nowrap;
 }
 
-.list_item:hover .list_hidden_context{
+.list-item:hover .list-hidden-context{
   cursor: pointer;
   display: block;
 }
 
-.list_hidden_context:hover {
+.list-hidden-context:hover {
   background: radial-gradient(green, #005700);
   color: white;
 }
 
-.top_average {
+.top-average {
     position: absolute;
     bottom: 0;
     left: 0;

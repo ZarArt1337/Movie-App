@@ -3,14 +3,14 @@ import { closeBurger } from "../../../main.js";
 
 const API_KEY = "32ccb349a74920e218cca3e62608f9ab";
 const container = document.getElementById("container");
-const prev = document.getElementById("prev_page");
-const next = document.getElementById("next_page");
-const current = document.getElementById("current_page");
-const first = document.getElementById("first_page");
-const myFavourite = document.getElementById("my_favourite");
-const closeFavourite = document.getElementById("close_button");
-const boxFavourite = document.getElementById("favourite_box");
-const topLists = document.getElementById("top_lists");
+const prev = document.getElementById("prev-page");
+const next = document.getElementById("next-page");
+const current = document.getElementById("current-page");
+const first = document.getElementById("first-page");
+const myFavourite = document.getElementById("my-favourite");
+const closeFavourite = document.getElementById("close-button");
+const boxFavourite = document.getElementById("favourite-box");
+const topLists = document.getElementById("top-lists");
 
 let currentPage = 1;
 let nextPage = 2;
@@ -45,7 +45,7 @@ export function fetchMovies(type, category, extras) {
           prev.classList.remove("hide");
         }
       } else {
-        container.innerHTML = '<h1 class="no_results">No results found.</h1>';
+        container.innerHTML = '<h1 class="no-results">No results found.</h1>';
       }
     });
 }
@@ -79,7 +79,6 @@ export const showMovies = data => {
     document.getElementById(id).addEventListener("click", () => {
       console.log(id);
       openModal(movie);
-      // heartChecking(movie);
     });
   });
 };
@@ -130,57 +129,54 @@ export function fetchTopLists(type, category, extras) {
 
 export const showTopLists = data => {
   topLists.innerHTML = "";
-  const savedMovies = JSON.parse(localStorage.getItem("favorite"));
-  const myFav = savedMovies;
 
   data.forEach(movie => {
     const { name, poster_path, id, title } = movie;
     const topListsEl = document.createElement("div");
-    topListsEl.classList.add("list_item");
+    topListsEl.classList.add("list-item");
     topListsEl.innerHTML = `
-      <img class ='list_img' src="${
+      <img class ='list-img' src="${
         poster_path
           ? `https://image.tmdb.org/t/p/w200${poster_path}`
           : "http://via.placeholder.com/300x450"
       }" alt="${name ? name : title}">
-      <span class="${getVoteColor(movie.vote_average)} top_average">${
+      <span class="${getVoteColor(movie.vote_average)} top-average">${
       movie.vote_average
     }</span>
-      <div class="list_hidden_context" id="${id}">Read more</div>`;
+      <div class="list-hidden-context" id="${id}">Read more</div>`;
 
     topLists.appendChild(topListsEl);
 
     document.getElementById(id).addEventListener("click", () => {
       console.log(id);
       openModal(movie);
-      heartChecking(movie);
     });
   });
 };
 
 //BUTTON ACTIVE LIST
 const activeListButton = active => {
-  const activeOn = document.querySelectorAll(".lists_btn_active");
+  const activeOn = document.querySelectorAll(".lists-btn-active");
 
   if (activeOn.length != 0) {
     activeOn.forEach(active => {
-      active.classList.remove("lists_btn_active");
+      active.classList.remove("lists-btn-active");
     });
-    document.getElementById(active).classList.add("lists_btn_active");
+    document.getElementById(active).classList.add("lists-btn-active");
   } else {
-    document.getElementById(active).classList.add("lists_btn_active");
+    document.getElementById(active).classList.add("lists-btn-active");
   }
 };
 
 //CHOSING TOP LIST
-document.getElementById("top_rated_movies").addEventListener("click", () => {
+document.getElementById("top-rated-movies").addEventListener("click", () => {
   fetchTopLists("movie", "top_rated", "");
-  activeListButton("top_rated_movies");
+  activeListButton("top-rated-movies");
 });
 
-document.getElementById("top_rated_series").addEventListener("click", () => {
-  fetchTopLists("tv", "top_rated", "");
-  activeListButton("top_rated_series");
+document.getElementById("now-playing").addEventListener("click", () => {
+  fetchTopLists("movie", "now_playing", "");
+  activeListButton("now-playing");
 });
 
 //DISPLAYING FAVOURITE MOVIES
@@ -203,7 +199,6 @@ export const showFavoriteMovies = () => {
         document.getElementById(id).addEventListener("click", () => {
           console.log(id);
           openModal(movie);
-          heartChecking(movie);
         });
       });
   });
@@ -214,10 +209,9 @@ document.querySelector(".print-fav").addEventListener("click", () => {
   showFavoriteMovies();
   myFavourite.classList.remove("hide");
   boxFavourite.classList.remove("hide");
-  boxFavourite.scrollIntoView({ behavior: "smooth" }, true);
 });
 
-document.querySelector(".print_fav_burger").addEventListener("click", () => {
+document.querySelector(".print-fav-burger").addEventListener("click", () => {
   showFavoriteMovies();
   myFavourite.classList.remove("hide");
   boxFavourite.classList.remove("hide");
@@ -229,14 +223,14 @@ closeFavourite.addEventListener("click", () => {
 });
 
 //PAGINATION
-document.getElementById("next_page").addEventListener("click", () => {
+document.getElementById("next-page").addEventListener("click", () => {
   fetchMovies("movie", "popular", `&page=${nextPage}`);
 });
 
-document.getElementById("prev_page").addEventListener("click", () => {
+document.getElementById("prev-page").addEventListener("click", () => {
   fetchMovies("movie", "popular", `&page=${prevPage}`);
 });
 
-document.getElementById("first_page").addEventListener("click", () => {
+document.getElementById("first-page").addEventListener("click", () => {
   fetchMovies("movie", "popular", "&page=1");
 });

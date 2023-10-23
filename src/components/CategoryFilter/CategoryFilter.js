@@ -44,7 +44,7 @@ function highlightSelection() {
 	}) 
 	if(selectedCategories.length !=0){ 
 		pagination.classList.add('hide');
-		document.getElementById('clear_btn').classList.remove('hide'); 
+		document.getElementById('clear-btn').classList.remove('hide'); 
 		selectedCategories.forEach(id => {
 			const hightlightedCategory = document.getElementById(id);
 			hightlightedCategory.classList.add('highlight');
@@ -62,7 +62,7 @@ export function removeHighlight() {
 }
 
 //CLEARING BUTTON
-document.getElementById("clear_btn").addEventListener("click", () => {
+document.getElementById("clear-btn").addEventListener("click", () => {
 	selectedCategories = [];
 	removeHighlight();
 	fetchMovies('movie','popular','');
@@ -71,7 +71,7 @@ document.getElementById("clear_btn").addEventListener("click", () => {
 })
 
 export function hideClearButton() {
-	document.getElementById('clear_btn').classList.add('hide');
+	document.getElementById('clear-btn').classList.add('hide');
 }
 
 fetchByCategory();

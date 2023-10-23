@@ -12,11 +12,11 @@
     overflow: hidden;
 }
 
-.show_more_categories {
+.show-more-categories {
     height: auto !important;
 }
 
-.category, .lists_btn{
+.category, .lists-btn{
     color:white;
     padding: 10px 20px;
     border-radius: 10px;
@@ -48,7 +48,7 @@
     display: none;
 }
 
-#clear_btn {
+#clear-btn {
     color:white;
     padding: 10px 20px;
     background: radial-gradient(orangered, red);
@@ -57,18 +57,18 @@
     cursor: pointer;
 }
 
-.clear_categories {
+.clear-categories {
     display: block;
     text-align: center;
 }
 
-.no_results {
+.no-results {
     color: white;
     padding: 20px;
 }
 
 /* Sort categories text */
-.sort_categories {
+.sort-categories {
     background-color: #01791f;
     text-align: center;
     color: white;
